@@ -37,6 +37,7 @@ async function run() {
       changes: 0
     }
 
+    console.log('Here We are before')
     //Variable with the Change Data Associated with the Pull Request
     InitialDiffData = PullReqData.data.reduce((PrvsValue, CurrentValue) => {
       PrvsValue.additions = PrvsValue.additions + CurrentValue.additions
@@ -45,6 +46,7 @@ async function run() {
     }, InitialDiffData)
 
     // Add A comment to the Pull Request with the FinalDiffData
+    console.log('Here We are after')
     await Octokit.rest.issues.createComment({
       owner: OwnerVar,
       repo: RepoVar,
