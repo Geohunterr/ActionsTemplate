@@ -1,19 +1,41 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
+name: 'pull-request-test' # Type the Name of Ur Action Preferablly Similar to that in Package.json
+description: 'GitHub Actions JavaScript Template Test with Pull Request Comments' #Type a Description of ur Action
 author: 'Your name or organization here'
 
 # Define your inputs here.
-inputs:
-  milliseconds:
-    description: 'Your input description here'
-    required: true
-    default: '1000'
+inputs: #The Names of the Inputs can be Anything like owner repo these aren't syntactic
+    owner:
+      description: "The Owner of the Repository (User or Organization)"
+      required: true
 
-# Define your outputs here.
-outputs:
-  time:
-    description: 'Your output description here'
+    repo:
+      description: "The Repository Name to which the Pull Request was made"
+      required: true
+
+    pullreq_number:
+      description: "The Number of the Pull Request in question"
+      required: true
+
+    github_token:
+      description: "The Github Token to Access the Repository Through the Runner By Calling the Github API"
+      required: true
+
+
+  #  milliseconds:
+    #    description: 'Your input description here'
+    #    required: true
+    #    default: '1000'
+
+
+
+
+# Define your outputs here. --> No Output for this Action
+#outputs:
+#  time:
+#    description: 'Your output description here'
+
+
 
 runs:
-  using: node20
+  using: node16
   main: dist/index.js
