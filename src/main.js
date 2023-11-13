@@ -21,14 +21,14 @@ async function run() {
     const Octokit = new GithubActions.getOctokit(GithubToken)
 
     //Use Octokit to Call the Github API to List Pull Requests Files
-    const PullReqsObj = await Octokit.rest.pulls.listFiles({
+    const {data:PullReqData} = await Octokit.rest.pulls.listFiles({
       owner: OwnerVar,
       repo: RepoVar,
       pull_number: PRNumb
     })
 
-    const PullReqData = PullReqsObj.data
-    console.log("PullReqsObj",PullReqsObj)
+    //const PullReqData = PullReqsObj.data
+    //console.log("PullReqsObj",PullReqsObj)
     //Variable Carrying the Initial Data Before the Change in the Pull Request Being Applied
     let InitialDiffData = {
       additions: 0,
@@ -37,7 +37,7 @@ async function run() {
     }
 
     //Variable with the Change Data Associated with the Pull Request
-    InitialDiffData = PullReqData.reduce(function (PrvsValue, CurrentValue) {
+    InitialDiffData = PullReqData.reduce((PrvsValue, CurrentValue)=> {
       PrvsValue.additions = PrvsValue.additions + CurrentValue.additions
       PrvsValue.deletions = PrvsValue.deletions + CurrentValue.deletions
       PrvsValue.changes = PrvsValue.changes + CurrentValue.changes
