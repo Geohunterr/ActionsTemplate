@@ -44,6 +44,8 @@ async function run() {
       DiffData.additions = DiffData.additions + PullReqData.data[i].additions
       DiffData.deletions = DiffData.deletions + PullReqData.data[i].deletions
       DiffData.changes = DiffData.changes + PullReqData.data[i].changes
+
+      //Prints Normally Just don't Forget to Run npm run all before hand
       console.log('DiffData.additions', DiffData.additions)
       console.log('DiffData.deletions', DiffData.deletions)
       console.log('DiffData.changes', DiffData.changes)
@@ -129,4 +131,4 @@ module.exports = {
   run
 }
 
-//After Finishing the Code Run [npm run all] in terminal
+//After Finishing the Code Run or CHANGING IT Always Run [npm run all] in terminal
