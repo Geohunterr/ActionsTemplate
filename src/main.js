@@ -8,20 +8,20 @@ const { wait } = require('./wait')
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
  */
-async function run(){
+async function run() {
   try {
     //Declare the Input Variables U Defined in the action.yml File
     const OwnerVar = CoreActions.getInput('owner', { required: true })
     const RepoVar = CoreActions.getInput('repo', { required: true })
     const PRNumb = CoreActions.getInput('pullreq_number', { required: true })
-    const GithubToken = CoreActions.getInput('github_token', { required: true  })
+    const GithubToken = CoreActions.getInput('github_token', { required: true })
 
     // Initialize an Octokit Instance --> Javascript Lib that Allows The Call of REST APIs
     // Use the Octokit Documentation to Call Github Rest API Cmds
     const Octokit = new GithubActions.getOctokit(GithubToken)
 
     //Use Octokit to Call the Github API to List Pull Requests Files
-    const {data:PullReqData} = await Octokit.rest.pulls.listFiles({
+    const { data: PullReqData } = await Octokit.rest.pulls.listFiles({
       owner: OwnerVar,
       repo: RepoVar,
       pull_number: PRNumb
@@ -38,7 +38,7 @@ async function run(){
     }
 
     //Variable with the Change Data Associated with the Pull Request
-    InitialDiffData = PullReqData.reduce((PrvsValue, CurrentValue)=> {
+    InitialDiffData = PullReqData.reduce((PrvsValue, CurrentValue) => {
       PrvsValue.additions = PrvsValue.additions + CurrentValue.additions
       PrvsValue.deletions = PrvsValue.deletions + CurrentValue.deletions
       PrvsValue.changes = PrvsValue.changes + CurrentValue.changes
@@ -57,7 +57,7 @@ async function run(){
     })
 
     // A Loop to Create the Labels of the Extensions of the Files in the Pull Request
-    for (const i of PullReqData){
+    for (const i of PullReqData) {
       //filname = readme.md
       //filename.split(".").pop() --> "md"
       const FileExtension = i.filename.split('.').pop()
