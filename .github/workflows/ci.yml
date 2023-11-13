@@ -3,9 +3,11 @@ name: Continuous Integration
 on:
   pull_request:
   push:
-   branches:
-     - main
-     - "releases/*"
+
+    branches:
+      - main
+      - "releases/*"
+
 
 jobs:
 #  test-javascript:
