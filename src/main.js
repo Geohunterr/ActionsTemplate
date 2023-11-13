@@ -8,7 +8,7 @@ const { wait } = require('./wait')
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
  */
-async function run(){
+async function run() {
   try {
     //Declare the Input Variables U Defined in the action.yml File
     const OwnerVar = CoreActions.getInput('owner', { required: true })
@@ -21,7 +21,7 @@ async function run(){
     const Octokit = new GithubActions.getOctokit(GithubToken)
 
     //Use Octokit to Call the Github API to List Pull Requests Files
-    const {items:PullReqData} = await Octokit.rest.pulls.listFiles({
+    const PullReqData = await Octokit.rest.pulls.listFiles({
       owner: OwnerVar,
       repo: RepoVar,
       pull_number: PRNumb
