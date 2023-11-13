@@ -21,7 +21,7 @@ async function run() {
     const Octokit = new GithubActions.getOctokit(GithubToken)
 
     //Use Octokit to Call the Github API to List Pull Requests Files
-    const { data: PullReqData } = await Octokit.rest.pulls.listFiles({
+    const PullReqData = await Octokit.rest.pulls.listFiles({
       owner: OwnerVar,
       repo: RepoVar,
       pull_number: PRNumb
