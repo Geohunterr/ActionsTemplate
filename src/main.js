@@ -29,7 +29,7 @@ async function run(){
 
     //const PullReqData = PullReqsObj.data
     //console.log("PullReqsObj",PullReqsObj)
-    CoreActions.debug(PullReqData)
+    CoreActions.info(PullReqData)
     //Variable Carrying the Initial Data Before the Change in the Pull Request Being Applied
     let InitialDiffData = {
       additions: 0,
