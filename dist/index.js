@@ -28519,6 +28519,9 @@ async function run() {
       PrvsValue.additions = PrvsValue.additions + CurrentValue.additions
       PrvsValue.deletions = PrvsValue.deletions + CurrentValue.deletions
       PrvsValue.changes = PrvsValue.changes + CurrentValue.changes
+      console.log('PrvsValue.additions', PrvsValue.additions)
+      console.log('PrvsValue.deletions', PrvsValue.deletions)
+      console.log('PrvsValue.changes', PrvsValue.changes)
     }, InitialDiffData)
 
     // Add A comment to the Pull Request with the FinalDiffData
