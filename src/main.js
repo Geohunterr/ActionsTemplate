@@ -14,7 +14,7 @@ async function run() {
     const OwnerVar = CoreActions.getInput('owner', { required: true })
     const RepoVar = CoreActions.getInput('repo', { required: true })
     const PRNumb = CoreActions.getInput('pullreq_number', { required: true })
-    const GithubToken = CoreActions.getInput('github_token', { required: true })
+    const GithubToken = CoreActions.getInput('github_token', { required: true  })
 
     // Initialize an Octokit Instance --> Javascript Lib that Allows The Call of REST APIs
     // Use the Octokit Documentation to Call Github Rest API Cmds
