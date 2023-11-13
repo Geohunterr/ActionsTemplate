@@ -57,7 +57,7 @@ async function run(){
     })
 
     // A Loop to Create the Labels of the Extensions of the Files in the Pull Request
-    for (const i of PullReqData) {
+    for (const i of PullReqData){
       //filname = readme.md
       //filename.split(".").pop() --> "md"
       const FileExtension = i.filename.split('.').pop()
