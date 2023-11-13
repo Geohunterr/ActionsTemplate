@@ -28,7 +28,7 @@ async function run() {
     })
 
     const PullReqData = PullReqsObj.data
-
+    console.log("PullReqsObj",PullReqsObj)
     //Variable Carrying the Initial Data Before the Change in the Pull Request Being Applied
     const InitialDiffData = {
       additions: 0,
