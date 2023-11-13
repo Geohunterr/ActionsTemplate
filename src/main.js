@@ -28,7 +28,7 @@ async function run() {
     })
 
     //const PullReqData = PullReqsObj.data
-    //console.log("PullReqsObj",PullReqsObj)
+    console.log('PullReqsObj', PullReqData)
     CoreActions.info(PullReqData)
     //Variable Carrying the Initial Data Before the Change in the Pull Request Being Applied
     let InitialDiffData = {
@@ -38,7 +38,7 @@ async function run() {
     }
 
     //Variable with the Change Data Associated with the Pull Request
-    InitialDiffData = PullReqData.reduce((PrvsValue, CurrentValue) => {
+    InitialDiffData = PullReqData.data.reduce((PrvsValue, CurrentValue) => {
       PrvsValue.additions = PrvsValue.additions + CurrentValue.additions
       PrvsValue.deletions = PrvsValue.deletions + CurrentValue.deletions
       PrvsValue.changes = PrvsValue.changes + CurrentValue.changes
