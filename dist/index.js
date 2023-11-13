@@ -28507,7 +28507,7 @@ async function run() {
     console.log('PullReqsObj', PullReqData)
     CoreActions.info(PullReqData)
     //Variable Carrying the Initial Data Before the Change in the Pull Request Being Applied
-    const InitialDiffData = {
+    const DiffData = {
       additions: 0,
       deletions: 0,
       changes: 0
@@ -28515,14 +28515,24 @@ async function run() {
 
     console.log('Here We are before')
     //Variable with the Change Data Associated with the Pull Request
-    const FinalDiffData = PullReqData.data.reduce((PrvsValue, CurrentValue) => {
-      PrvsValue.additions = PrvsValue.additions + CurrentValue.additions
-      PrvsValue.deletions = PrvsValue.deletions + CurrentValue.deletions
-      PrvsValue.changes = PrvsValue.changes + CurrentValue.changes
-      console.log('PrvsValue.additions', PrvsValue.additions)
-      console.log('PrvsValue.deletions', PrvsValue.deletions)
-      console.log('PrvsValue.changes', PrvsValue.changes)
-    }, InitialDiffData)
+
+    for (let i = 0; i < PullReqData.data.length; i++) {
+      DiffData.additions = DiffData.additions + PullReqData.data[i].additions
+      DiffData.deletions = DiffData.deletions + PullReqData.data[i].deletions
+      DiffData.changes = DiffData.changes + PullReqData.data[i].changes
+      console.log('DiffData.additions', DiffData.additions)
+      console.log('DiffData.deletions', DiffData.deletions)
+      console.log('DiffData.changes', DiffData.changes)
+    }
+
+    // const FinalDiffData = PullReqData.data.reduce((PrvsValue, CurrentValue) => {
+    //   PrvsValue.additions = PrvsValue.additions + CurrentValue.additions
+    //   PrvsValue.deletions = PrvsValue.deletions + CurrentValue.deletions
+    //   PrvsValue.changes = PrvsValue.changes + CurrentValue.changes
+    //   console.log('PrvsValue.additions', PrvsValue.additions)
+    //   console.log('PrvsValue.deletions', PrvsValue.deletions)
+    //   console.log('PrvsValue.changes', PrvsValue.changes)
+    // }, InitialDiffData)
 
     // Add A comment to the Pull Request with the FinalDiffData
     console.log('Here We are after')
@@ -28531,9 +28541,9 @@ async function run() {
       repo: RepoVar,
       issue_number: PRNumb,
       body: `Pull Request #${PRNumb} has been Updated with: \n
-              - ${FinalDiffData.changes} changes \n
-              - ${FinalDiffData.additions} additions \n
-              - ${FinalDiffData.deletions} deletions \n
+              - ${DiffData.changes} changes \n
+              - ${DiffData.additions} additions \n
+              - ${DiffData.deletions} deletions \n
           `
     })
 
