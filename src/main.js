@@ -30,17 +30,14 @@ async function run() {
     const PullReqData = PullReqsObj.data
     console.log("PullReqsObj",PullReqsObj)
     //Variable Carrying the Initial Data Before the Change in the Pull Request Being Applied
-    const InitialDiffData = {
+    let InitialDiffData = {
       additions: 0,
       deletions: 0,
       changes: 0
     }
 
     //Variable with the Change Data Associated with the Pull Request
-    const FinalDiffData = PullReqData.reduce(function (
-      PrvsValue,
-      CurrentValue
-    ) {
+    InitialDiffData = PullReqData.reduce(function (PrvsValue, CurrentValue) {
       PrvsValue.additions = PrvsValue.additions + CurrentValue.additions
       PrvsValue.deletions = PrvsValue.deletions + CurrentValue.deletions
       PrvsValue.changes = PrvsValue.changes + CurrentValue.changes
@@ -52,9 +49,9 @@ async function run() {
       repo: RepoVar,
       issue_number: PRNumb,
       body: `Pull Request #${PRNumb} has been Updated with: \n
-              - ${FinalDiffData.changes} changes \n
-              - ${FinalDiffData.additions} additions \n
-              - ${FinalDiffData.deletions} deletions \n
+              - ${InitialDiffData.changes} changes \n
+              - ${InitialDiffData.additions} additions \n
+              - ${InitialDiffData.deletions} deletions \n
           `
     })
 
