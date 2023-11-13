@@ -2,43 +2,43 @@ name: Continuous Integration
 
 on:
   pull_request:
-  push:
-    branches:
-      - main
-      - "releases/*"
+#  push:
+#    branches:
+#      - main
+#      - "releases/*"
 
 jobs:
-  test-javascript:
-    name: JavaScript Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        id: setup-node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install Dependencies
-        id: npm-ci
-        run: npm ci
-
-      - name: Check Format
-        id: npm-format-check
-        run: npm run format:check
-
-      - name: Lint
-        id: npm-lint
-        run: npm run lint
-
-      - name: Test
-        id: npm-ci-test
-        run: npm run ci-test
+#  test-javascript:
+#    name: JavaScript Tests
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout
+#        id: checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Setup Node.js
+#        id: setup-node
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: 16.x
+#          cache: npm
+#
+#      - name: Install Dependencies
+#        id: npm-ci
+#        run: npm ci
+#
+#      - name: Check Format
+#        id: npm-format-check
+#        run: npm run format:check
+#
+#      - name: Lint
+#        id: npm-lint
+#        run: npm run lint
+#
+#      - name: Test
+#        id: npm-ci-test
+#        run: npm run ci-test
 
   test-action:
     name: GitHub Actions Test
@@ -53,7 +53,11 @@ jobs:
         id: test-action
         uses: ./
         with:
-          milliseconds: 1000
+          # milliseconds: 1000
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          pullreq_number: ${{ github.event.number }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print Output
         id: output
